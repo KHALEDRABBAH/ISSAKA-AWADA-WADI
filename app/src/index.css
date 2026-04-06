@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 43 50% 59%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 7%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 43 50% 59%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 43 50% 59%;
+    --radius: 0.5rem;
+    
+    /* Custom luxury variables */
+    --gold: #C9A962;
+    --gold-dark: #B89752;
+    --gold-light: #E8D5A3;
+    --dark: #000000;
+    --dark-secondary: #111111;
+    --dark-tertiary: #1a1a1a;
+    
+    /* Animation easings */
+    --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-expo-in: cubic-bezier(0.7, 0, 0.84, 0);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-dramatic: cubic-bezier(0.87, 0, 0.13, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-cinematic: cubic-bezier(0.190, 1, 0.220, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-dark text-white font-body antialiased;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+  
+  /* Arabic font support */
+  [dir="rtl"] {
+    font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+  }
+  
+  [dir="rtl"] h1, 
+  [dir="rtl"] h2, 
+  [dir="rtl"] h3, 
+  [dir="rtl"] h4, 
+  [dir="rtl"] h5, 
+  [dir="rtl"] h6 {
+    font-family: 'Noto Sans Arabic', 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  /* Luxury text gradient */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Gold shimmer effect */
+  .shimmer-gold {
+    background: linear-gradient(
+      90deg,
+      var(--gold) 0%,
+      var(--gold-light) 25%,
+      var(--gold) 50%,
+      var(--gold-light) 75%,
+      var(--gold) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 4s ease-in-out infinite;
+  }
+  
+  /* Glassmorphism effect */
+  .glass {
+    background: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  /* Gold border glow */
+  .border-glow {
+    border: 1px solid rgba(201, 169, 98, 0.3);
+    transition: all 0.3s var(--ease-expo-out);
+  }
+  
+  .border-glow:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201, 169, 98, 0.3);
+  }
+  
+  /* Luxury button styles */
+  .btn-luxury {
+    @apply relative overflow-hidden px-8 py-4 border border-gold text-gold font-body text-sm tracking-widest uppercase;
+    transition: all 0.4s var(--ease-expo-out);
+  }
+  
+  .btn-luxury::before {
+    content: '';
+    @apply absolute inset-0 bg-gold;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-expo-out);
+    z-index: -1;
+  }
+  
+  .btn-luxury:hover {
+    @apply text-dark;
+  }
+  
+  .btn-luxury:hover::before {
+    transform: scaleX(1);
+  }
+  
+  /* Section label style */
+  .section-label {
+    @apply text-gold text-xs font-body font-semibold tracking-[0.3em] uppercase;
+  }
+  
+  /* Card luxury style */
+  .card-luxury {
+    @apply bg-dark-secondary border-l-[3px] border-gold p-8;
+    box-shadow: -20px 20px 60px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Image hover effect */
+  .img-hover-zoom {
+    @apply overflow-hidden;
+  }
+  
+  .img-hover-zoom img {
+    transition: transform 0.6s var(--ease-expo-out), filter 0.6s var(--ease-expo-out);
+  }
+  
+  .img-hover-zoom:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+  
+  /* Link underline animation */
+  .link-underline {
+    @apply relative;
+  }
+  
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 w-0 h-[1px] bg-gold;
+    transition: all 0.3s var(--ease-expo-out);
+    transform: translateX(-50%);
+  }
+  
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+  
+  /* Particle background */
+  .particles {
+    @apply absolute inset-0 overflow-hidden pointer-events-none;
+  }
+  
+  .particle {
+    @apply absolute w-1 h-1 rounded-full bg-gold/40;
+    animation: particle 15s ease-in-out infinite;
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-dark;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold/30 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold/50;
+  }
+  
+  /* Selection styling */
+  ::selection {
+    @apply bg-gold/30 text-white;
+  }
+}
+
+@layer utilities {
+  /* Animation delays */
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+  .animation-delay-700 { animation-delay: 700ms; }
+  .animation-delay-800 { animation-delay: 800ms; }
+  
+  /* Text shadow for gold glow */
+  .text-shadow-gold {
+    text-shadow: 0 0 20px rgba(201, 169, 98, 0.5);
+  }
+  
+  /* Clip path utilities */
+  .clip-inset-full {
+    clip-path: inset(100% 0 0 0);
+  }
+  
+  .clip-inset-none {
+    clip-path: inset(0);
+  }
+  
+  /* Perspective utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

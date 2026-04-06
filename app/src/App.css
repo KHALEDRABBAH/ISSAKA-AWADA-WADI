@@ -1,0 +1,421 @@
+/* App-specific styles */
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 169, 98, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 169, 98, 0.5);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(201, 169, 98, 0.3);
+  color: #ffffff;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #C9A962;
+  outline-offset: 2px;
+}
+
+/* Image loading placeholder */
+img {
+  background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+}
+
+/* Prevent text selection on interactive elements */
+button,
+a {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Smooth transitions for all interactive elements */
+button,
+a,
+input,
+textarea {
+  transition: all 0.3s ease;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(17, 17, 17, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #C9A962 0%, #E8D5A3 50%, #C9A962 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer animation for gold elements */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    #C9A962 0%,
+    #E8D5A3 25%,
+    #C9A962 50%,
+    #E8D5A3 75%,
+    #C9A962 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(201, 169, 98, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(201, 169, 98, 0.5);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* Particle animation */
+@keyframes particle {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translate(10px, -20px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-5px, -40px);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(15px, -20px);
+    opacity: 0.6;
+  }
+}
+
+/* Card luxury style */
+.card-luxury {
+  background: #111111;
+  border-left: 3px solid #C9A962;
+  padding: 2rem;
+  box-shadow: -20px 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* RTL support for card luxury */
+[dir="rtl"] .card-luxury {
+  border-left: none;
+  border-right: 3px solid #C9A962;
+  box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Button luxury style */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 2rem;
+  border: 1px solid #C9A962;
+  color: #C9A962;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #C9A962;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.btn-luxury:hover {
+  color: #000000;
+}
+
+.btn-luxury:hover::before {
+  transform: scaleX(1);
+}
+
+/* RTL support for button */
+[dir="rtl"] .btn-luxury::before {
+  transform-origin: right;
+}
+
+/* Section label style */
+.section-label {
+  color: #C9A962;
+  font-size: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* Link underline animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: #C9A962;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-50%);
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Image hover zoom effect */
+.img-hover-zoom {
+  overflow: hidden;
+}
+
+.img-hover-zoom img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-hover-zoom:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Border glow effect */
+.border-glow {
+  border: 1px solid rgba(201, 169, 98, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.border-glow:hover {
+  border-color: #C9A962;
+  box-shadow: 0 0 20px rgba(201, 169, 98, 0.3);
+}
+
+/* Perspective utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Animation delay utilities */
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .card-luxury {
+    padding: 1.5rem;
+  }
+  
+  .btn-luxury {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* ============================
+   Gallery Slider Styles
+   ============================ */
+
+/* Hide scrollbar for gallery slider */
+.gallery-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-slider {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 1.5rem;
+}
+
+/* Gallery card styling */
+.gallery-card {
+  scroll-snap-align: start;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Priority card styling */
+.gallery-card-priority {
+  position: relative;
+}
+
+.gallery-card-priority::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(201, 169, 98, 0.3), transparent, rgba(201, 169, 98, 0.2));
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.gallery-card-priority:hover::after {
+  opacity: 1;
+}
+
+/* ============================
+   Lightbox Animations
+   ============================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================
+   Priority Photo Styles
+   ============================ */
+
+.bio-photo-container,
+.contact-photo-container {
+  position: relative;
+}
+
+.bio-photo-container::before,
+.contact-photo-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border: 1px solid rgba(201, 169, 98, 0.15);
+  transition: border-color 0.5s ease;
+}
+
+.bio-photo-container:hover::before,
+.contact-photo-container:hover::before {
+  border-color: rgba(201, 169, 98, 0.35);
+}
+
+/* Contact card hover */
+.contact-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: -20px 20px 60px rgba(0, 0, 0, 0.5),
+              0 0 30px rgba(201, 169, 98, 0.05);
+}
+
+/* RTL support for contact cards */
+[dir="rtl"] .contact-card:hover {
+  transform: translateY(-2px);
+}
