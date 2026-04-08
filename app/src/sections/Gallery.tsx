@@ -7,95 +7,77 @@ import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 // ============================================================
-// GALLERY IMAGES — Ordered by priority (1 = highest)
-// To add more images, simply append to this array.
+// GALLERY IMAGES — All 54, strict order 1 through 54
+// Professional captions based on outfit, setting & appearance
 // ============================================================
-const galleryImages = [
-  // === PRIORITY 1–2: Hero shots — largest cards, gold borders, eager load ===
-  { src: '/images/bio-main.jpg', alt: 'Elegant Brown Suit Portrait', category: 'Portrait' },
-  { src: '/images/contact-main.jpg', alt: 'Coral Suit Seated Portrait', category: 'Portrait' },
+interface GalleryImage {
+  src: string;
+  index: number;
+  caption: string;
+  alt: string;
+}
 
-  // === PRIORITY 3–5: Key fashion/editorial (Session 1 uploads) ===
-  { src: '/images/gallery-new-2.jpg', alt: 'Orange Suit Standing', category: 'Fashion' },
-  { src: '/images/gallery-new-1.jpg', alt: 'White Shirt Studio', category: 'Studio' },
-  { src: '/images/gallery-new-3.jpg', alt: 'Dynamic Artistic Pose', category: 'Art' },
+const galleryImages: GalleryImage[] = [
+  { index: 1,  caption: 'Classic Tan Double-Breasted Suit',              alt: 'Issaka in a distinguished tan double-breasted suit with gold buttons' },
+  { index: 2,  caption: 'Contemporary Coral Tailoring',                  alt: 'Issaka in a bold coral double-breasted suit with white shirt' },
+  { index: 3,  caption: 'Premium Studio Portrait',                      alt: 'A refined studio portrait in a tan double-breasted suit' },
+  { index: 4,  caption: 'Brown Corduroy Elegance',                      alt: 'A sophisticated look featuring a brown corduroy double-breasted suit' },
+  { index: 5,  caption: 'Effortless Studio Style',                      alt: 'Relaxed studio shoot in a classic white shirt and tan trousers' },
+  { index: 6,  caption: 'Bold Plaid Three-Piece Ensemble',              alt: 'A sharp three-piece plaid suit with a vibrant blue striped shirt' },
+  { index: 7,  caption: 'Minimalist Winter Noir',                       alt: 'A textured black coat with matching scarf and beanie' },
+  { index: 8,  caption: 'Parisian Travel Style — Eiffel Tower',         alt: 'Coordinated peach-toned tracksuit against the Eiffel Tower backdrop' },
+  { index: 9,  caption: 'Elegant Traditional Agbada',                   alt: 'Light blue Agbada with intricate gold embroidery and kufi cap' },
+  { index: 10, caption: 'Urban Casual Graphic Tee',                     alt: 'Relaxed everyday style in a pale yellow graphic t-shirt' },
+  { index: 11, caption: 'Salmon Double-Breasted Statement',             alt: 'A striking salmon-colored suit with gold buttons and dark-rimmed eyewear' },
+  { index: 12, caption: 'Relaxed Linen Studio Portrait',                alt: 'Light beige linen shirt in an elegant studio setting' },
+  { index: 13, caption: 'Camel Suit & Blue Tie Formal',                 alt: 'Timeless camel-colored suit with a crisp white shirt and blue tie' },
+  { index: 14, caption: 'Airport Fashion — Travel Chic',                alt: 'Chocolate brown suit with a grey turtleneck and modern sneakers' },
+  { index: 15, caption: 'Blue Checked Three-Piece Suit',                alt: 'Contemporary business elegance in a tailored checked waistcoat and trousers' },
+  { index: 16, caption: 'Orange Turtleneck & Blazer Layering',          alt: 'Vibrant orange turtleneck under a dark blazer amid lush greenery' },
+  { index: 17, caption: 'Sophisticated Winter Casual',                  alt: 'Black textured coat with a beanie and scarf — studio portrait' },
+  { index: 18, caption: 'Coral Suit — Velvet Chair Portrait',           alt: 'Sharp coral double-breasted suit seated in a luxurious velvet chair' },
+  { index: 19, caption: 'Gold Damask Evening Blazer',                   alt: 'Ornate gold and bronze damask blazer with black lapels' },
+  { index: 20, caption: 'Mediterranean Summer Style',                   alt: 'Royal blue trousers with a white tank top in a lush garden setting' },
+  { index: 21, caption: 'Tan Wool Overcoat — Urban Portrait',           alt: 'Sophisticated tan overcoat with a patterned tie — close-up' },
+  { index: 23, caption: 'Casual Polo & Denim',                          alt: 'White polo with dark green collar and light blue jeans outdoors' },
+  { index: 24, caption: 'Off-White Suit — Evening Lounge',              alt: 'Light beige suit with sunglasses in a high-end lounge setting' },
+  { index: 25, caption: 'Event Presentation — Formal Host',             alt: 'White dress shirt with a tailored vest at a professional event' },
+  { index: 26, caption: 'Velvet Blazer — Gala Ready',                   alt: 'Dark green velvet blazer over a black button-down shirt' },
+  { index: 27, caption: 'Coastal Linen — Summer Ease',                  alt: 'Light blue linen shirt with beige chinos for a seaside look' },
+  { index: 28, caption: 'Modern Business — Open Collar',                alt: 'Charcoal grey suit with an open-collar white shirt' },
+  { index: 29, caption: 'Balenciaga Street Style — La Défense',         alt: 'Grey Balenciaga logo sweater with coral trousers in Paris' },
+  { index: 30, caption: 'Navy Suit — Red Carpet Elegance',              alt: 'Sharp navy blue suit with a crisp shirt and patterned tie' },
+  { index: 31, caption: 'Classic Leather Jacket Edge',                  alt: 'Black leather jacket over a white crew neck t-shirt' },
+  { index: 32, caption: 'Majestic Overcoat — Pamukkale Terraces',       alt: 'Beige trench overcoat on the white travertine terraces of Pamukkale' },
+  { index: 33, caption: 'All-Black Turtleneck & Blazer',                alt: 'Minimalist black turtleneck with a sharp black blazer' },
+  { index: 34, caption: 'Designer Street Style — Urban Setting',        alt: 'Balenciaga sweater with coral trousers against Parisian skyline' },
+  { index: 35, caption: 'Casual Graphic Tee — Indoor',                  alt: 'Deep blue graphic t-shirt with a red-accented sports watch' },
+  { index: 36, caption: 'Layered Overcoat — Café Portrait',             alt: 'Beige overcoat over a brown cardigan and green textured tie' },
+  { index: 37, caption: 'Crisp White Shirt — Dynamic Studio',           alt: 'Clean white button-down with beige trousers in motion' },
+  { index: 38, caption: 'Caramel Double-Breasted — Formal Evening',     alt: 'Caramel tan suit with gold buttons in a refined atmosphere' },
+  { index: 39, caption: 'Golden Hour — Pamukkale Overlook',             alt: 'Beige overcoat at the Pamukkale salt hills during golden hour' },
+  { index: 40, caption: 'Vibrant Coral — Contemporary Formal',          alt: 'Bold coral double-breasted suit with warm indoor lighting' },
+  { index: 41, caption: 'Blue Waistcoat & Checkered Trousers',          alt: 'Polished semi-formal look with glasses on an indoor staircase' },
+  { index: 42, caption: 'Designer Overcoat — Pamukkale Close-Up',       alt: 'Beige trench overcoat with editorial styling at Pamukkale' },
+  { index: 43, caption: 'Casual at the Pyramids of Giza',               alt: 'White jumper with green collar and denim jeans at the Great Pyramid' },
+  { index: 44, caption: 'Minimalist Studio Portrait',                   alt: 'Professional portrait in a charcoal grey t-shirt' },
+  { index: 45, caption: 'Parisian Casual — Louvre Pyramid',             alt: 'All-black ensemble standing before the iconic Louvre Pyramid' },
+  { index: 46, caption: 'Designer Trench — Editorial Fashion',          alt: 'Long beige trench coat with architectural pocket detailing' },
+  { index: 47, caption: 'Desert Explorer — Giza Skyline',               alt: 'Light blue denim jacket at the Great Pyramids of Giza' },
+  { index: 48, caption: 'Red Carpet Gala — Classic Black Tie',          alt: 'Timeless black suit with white shirt and bow tie' },
+  { index: 49, caption: 'Relaxed Bistro — Everyday Luxury',             alt: 'Casual black t-shirt in a relaxed restaurant setting' },
+  { index: 50, caption: 'Avant-Garde Streetwear — Eiffel Tower',        alt: 'Beige tracksuit with overcoat and statement sunglasses in Paris' },
+  { index: 51, caption: 'Dramatic Studio — Noir Portrait',              alt: 'Textured black designer coat in a dramatic dark studio' },
+  { index: 52, caption: 'Minimalist Grey Turtleneck — Studio',          alt: 'Clean grey turtleneck in a bright studio environment' },
+  { index: 53, caption: 'Monochrome Loungewear — Studio Fashion',       alt: 'Coordinated grey sweatshirt and trousers in a minimalist studio' },
+  { index: 54, caption: 'Artistic Designer Shirt — Studio',             alt: 'White designer shirt with intricate artistic patterns' },
+].map(img => ({
+  ...img,
+  src: `/images/gallery/${img.index}.jpeg`,
+}));
 
-  // === PRIORITY 6–10: New session uploads ===
-  { src: '/images/gallery-new-4.jpg', alt: 'Red Carpet Premiere', category: 'Events' },
-  { src: '/images/gallery-new-5.jpg', alt: 'Airport Travel Style', category: 'Lifestyle' },
-  { src: '/images/gallery-new-6.jpg', alt: 'Black Tee Studio', category: 'Studio' },
-  { src: '/images/gallery-new-7.jpg', alt: 'Grey Turtleneck Close-up', category: 'Portrait' },
-  { src: '/images/gallery-new-8.jpg', alt: 'Grey Turtleneck Portrait', category: 'Portrait' },
-
-  // === PRIORITY 11–15: Professional studio shots (DSC series) ===
-  { src: '/images/DSC09005.jpg.jpeg', alt: 'Grey Seated Studio', category: 'Studio' },
-  { src: '/images/DSC09054.jpg.jpeg', alt: 'Elegant Studio Portrait', category: 'Portrait' },
-  { src: '/images/DSC09017.jpg.jpeg', alt: 'Studio Session', category: 'Studio' },
-  { src: '/images/DSC09021.jpg.jpeg', alt: 'Fashion Editorial', category: 'Fashion' },
-  { src: '/images/DSC09023.jpg.jpeg', alt: 'Studio Close-up', category: 'Studio' },
-
-  // === PRIORITY 16–20: More studio and editorial ===
-  { src: '/images/DSC09040.jpg.jpeg', alt: 'Artistic Studio Shot', category: 'Studio' },
-  { src: '/images/DSC08917.jpg.jpeg', alt: 'Dramatic Lighting', category: 'Portrait' },
-  { src: '/images/DSC08923.jpg.jpeg', alt: 'Contemplative Pose', category: 'Portrait' },
-  { src: '/images/DSC08933.jpg.jpeg', alt: 'Dramatic Look', category: 'Portrait' },
-  { src: '/images/DSC08946.jpg.jpeg', alt: 'Fashion Studio Pose', category: 'Fashion' },
-
-  // === PRIORITY 21–25: Professional camera shots ===
-  { src: '/images/2Z3A5160.jpg.jpeg', alt: 'Traditional Attire', category: 'Fashion' },
-  { src: '/images/2Z3A5164.jpg.jpeg', alt: 'Elegant Style', category: 'Fashion' },
-  { src: '/images/2Z3A5191.jpg.jpeg', alt: 'Full Body Editorial', category: 'Fashion' },
-  { src: '/images/2Z3A6773.JPG.jpeg', alt: 'Formal Wear', category: 'Fashion' },
-  { src: '/images/2Z3A6786.JPG.jpeg', alt: 'Formal Portrait', category: 'Fashion' },
-
-  // === PRIORITY 26–30: Professional editorial (2Z3A + DSC_) ===
-  { src: '/images/2Z3A0411.jpg.jpeg', alt: 'Couple Editorial', category: 'Editorial' },
-  { src: '/images/DSC_6517 (1).JPG.jpeg', alt: 'Professional Session', category: 'Portrait' },
-  { src: '/images/DSC_0773.JPG.jpeg', alt: 'Natural Light Portrait', category: 'Portrait' },
-  { src: '/images/DSC_0828.JPG.jpeg', alt: 'Professional Headshot', category: 'Portrait' },
-  { src: '/images/DSC_7952 (1).JPG.jpeg', alt: 'Classic Portrait', category: 'Portrait' },
-
-  // === PRIORITY 31–35: Additional DSC series ===
-  { src: '/images/DSC_7971 (1).JPG.jpeg', alt: 'Outdoor Portrait', category: 'Portrait' },
-  { src: '/images/DSC_8039.JPG.jpeg', alt: 'Camera-ready Pose', category: 'Portrait' },
-  { src: '/images/DSC_8818.JPG.jpeg', alt: 'Blue Tone Portrait', category: 'Fashion' },
-  { src: '/images/DSC_8903.JPG.jpeg', alt: 'Blue Suit Elegance', category: 'Fashion' },
-  { src: '/images/1.jpg.jpeg', alt: 'Brown Suit — Wide Angle', category: 'Fashion' },
-
-  // === PRIORITY 36–40: Numbered collection ===
-  { src: '/images/4-1.jpg.jpeg', alt: 'Fashion Moment', category: 'Fashion' },
-  { src: '/images/9.jpg.jpeg', alt: 'Signature Style', category: 'Fashion' },
-  { src: '/images/11.jpg.jpeg', alt: 'Editorial Highlight', category: 'Editorial' },
-  { src: '/images/13 (1).jpg.jpeg', alt: 'Stylish Composition', category: 'Fashion' },
-  { src: '/images/14 (1).jpg.jpeg', alt: 'Casual Elegance', category: 'Fashion' },
-
-  // === PRIORITY 41–45 ===
-  { src: '/images/19.jpg.jpeg', alt: 'Fashion Forward', category: 'Fashion' },
-  { src: '/images/28.jpg.jpeg', alt: 'Movement Study', category: 'Art' },
-  { src: '/images/29.jpg.jpeg', alt: 'Dynamic Frame', category: 'Art' },
-  { src: '/images/31.jpg.jpeg', alt: 'Composition Study', category: 'Art' },
-  { src: '/images/40-1.jpg.jpeg', alt: 'Bold Fashion', category: 'Fashion' },
-
-  // === PRIORITY 46–50: Timestamped personal photos ===
-  { src: '/images/20260405_161158.jpg.jpeg', alt: 'Latest Session 2026', category: 'Latest' },
-  { src: '/images/20260405_162646.jpg.jpeg', alt: 'Modern Portrait 2026', category: 'Latest' },
-  { src: '/images/20260405_162705.jpg.jpeg', alt: 'Fresh Look 2026', category: 'Latest' },
-  { src: '/images/20260302_220454.jpg.jpeg', alt: 'Spring Collection', category: 'Fashion' },
-  { src: '/images/20260302_223211.jpg.jpeg', alt: 'Evening Attire', category: 'Fashion' },
-
-  // === PRIORITY 51–56: More personal / early career ===
-  { src: '/images/20260211_221707.jpg.jpeg', alt: 'Winter Style', category: 'Fashion' },
-  { src: '/images/20260211_221744.jpg.jpeg', alt: 'Sophisticated Look', category: 'Fashion' },
-  { src: '/images/20240327_132150.jpg.jpeg', alt: 'Travel Diary', category: 'Lifestyle' },
-  { src: '/images/20231230_082249 (1).jpg.jpeg', alt: 'Year-End Celebration', category: 'Events' },
-  { src: '/images/20191231_220800.jpg.jpeg', alt: 'The Beginning', category: 'Archive' },
-  { src: '/images/20191201_222613.jpg.jpeg', alt: 'Early Career', category: 'Archive' },
-];
-
-// Number of truly "priority" images that get special visual treatment
-const TOP_PRIORITY_COUNT = 2;
-// First N images load eagerly (above-the-fold)
-const EAGER_LOAD_COUNT = 6;
+const TOTAL = galleryImages.length; // 54 images
+const EAGER_COUNT = 6;
 
 const Gallery: React.FC = () => {
   const { t } = useLanguage();
@@ -107,34 +89,66 @@ const Gallery: React.FC = () => {
   const [dragStartX, setDragStartX] = useState(0);
   const [dragScrollLeft, setDragScrollLeft] = useState(0);
   const [dragMoved, setDragMoved] = useState(false);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // ── Scroll button state ──────────────────────────────────
-  const updateScrollButtons = useCallback(() => {
-    if (!sliderRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
-    setCanScrollLeft(scrollLeft > 5);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
+  // ── Infinite‑loop scroll handling ─────────────────────────
+  // We clone a set of images at beginning and end to create
+  // the illusion of infinite scrolling
+  const CLONE_COUNT = 8; // number of images cloned on each side
+
+  // Build the extended list: [...last N] + [...original] + [...first N]
+  const extendedImages = [
+    ...galleryImages.slice(-CLONE_COUNT).map((img, i) => ({ ...img, key: `clone-end-${i}` })),
+    ...galleryImages.map((img, i) => ({ ...img, key: `original-${i}` })),
+    ...galleryImages.slice(0, CLONE_COUNT).map((img, i) => ({ ...img, key: `clone-start-${i}` })),
+  ];
+
+  const getCardWidth = () => (typeof window !== 'undefined' && window.innerWidth < 768 ? 260 : 310);
+  const getGap = () => 16; // gap-4
+
+  // Jump to start of real content on mount
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+    const setInitialScroll = () => {
+      const cardW = getCardWidth() + getGap();
+      slider.scrollLeft = CLONE_COUNT * cardW;
+    };
+    // Set immediately
+    setInitialScroll();
+    // Re-set after rAF and a short delay to ensure layout is stable
+    requestAnimationFrame(setInitialScroll);
+    const timer = setTimeout(setInitialScroll, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle infinite loop: when scrolling past clones, jump back
+  const handleInfiniteScroll = useCallback(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+    const cardW = getCardWidth() + getGap();
+    const cloneWidth = CLONE_COUNT * cardW;
+    const totalRealWidth = TOTAL * cardW;
+
+    // If scrolled past the end clones -> jump to start of real section
+    if (slider.scrollLeft >= cloneWidth + totalRealWidth) {
+      slider.scrollLeft = cloneWidth + (slider.scrollLeft - cloneWidth - totalRealWidth);
+    }
+    // If scrolled before the start clones -> jump to end of real section
+    if (slider.scrollLeft < cloneWidth - cardW) {
+      slider.scrollLeft = cloneWidth + totalRealWidth + (slider.scrollLeft - cloneWidth);
+    }
   }, []);
 
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
-    slider.addEventListener('scroll', updateScrollButtons, { passive: true });
-    updateScrollButtons();
-    // Recheck after images settle
-    const timer = setTimeout(updateScrollButtons, 500);
-    return () => {
-      slider.removeEventListener('scroll', updateScrollButtons);
-      clearTimeout(timer);
-    };
-  }, [updateScrollButtons]);
+    slider.addEventListener('scroll', handleInfiniteScroll, { passive: true });
+    return () => slider.removeEventListener('scroll', handleInfiniteScroll);
+  }, [handleInfiniteScroll]);
 
-  // ── GSAP section-entrance animations ─────────────────────
+  // ── GSAP entrance ────────────────────────────────────────
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Header
       gsap.set('.gallery-header-label', { opacity: 0, y: 20 });
       gsap.set('.gallery-header-title', { opacity: 0, y: 30 });
 
@@ -152,7 +166,6 @@ const Gallery: React.FC = () => {
         once: true,
       });
 
-      // First visible batch of cards (animate only first ~8 so it doesn't feel excessive)
       const firstCards = sliderRef.current?.querySelectorAll('.gallery-card:nth-child(-n+8)');
       if (firstCards) {
         gsap.set(firstCards, { opacity: 0, y: 30, scale: 0.95 });
@@ -173,7 +186,7 @@ const Gallery: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
-  // ── Mouse-drag for desktop ───────────────────────────────
+  // ── Mouse‑drag for desktop ──────────────────────────────
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!sliderRef.current) return;
     setIsDragging(true);
@@ -181,7 +194,7 @@ const Gallery: React.FC = () => {
     setDragStartX(e.pageX - sliderRef.current.offsetLeft);
     setDragScrollLeft(sliderRef.current.scrollLeft);
     sliderRef.current.style.cursor = 'grabbing';
-    sliderRef.current.style.scrollSnapType = 'none'; // disable snap while dragging
+    sliderRef.current.style.scrollSnapType = 'none';
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -197,22 +210,22 @@ const Gallery: React.FC = () => {
     setIsDragging(false);
     if (sliderRef.current) {
       sliderRef.current.style.cursor = 'grab';
-      sliderRef.current.style.scrollSnapType = 'x mandatory'; // re-enable snap
+      sliderRef.current.style.scrollSnapType = 'x mandatory';
     }
   };
 
-  // ── Arrow button scroll ──────────────────────────────────
+  // ── Arrow scroll (always enabled for infinite loop) ─────
   const scrollSlider = (direction: 'left' | 'right') => {
     if (!sliderRef.current) return;
-    const cardWidth = window.innerWidth < 768 ? 280 : 340;
+    const cardWidth = getCardWidth();
     const scrollAmount = direction === 'left' ? -cardWidth * 2 : cardWidth * 2;
     sliderRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   };
 
   // ── Lightbox ─────────────────────────────────────────────
-  const openLightbox = (index: number) => {
-    if (dragMoved) return;            // ignore if user was dragging
-    setSelectedImage(index);
+  const openLightbox = (realIndex: number) => {
+    if (dragMoved) return;
+    setSelectedImage(realIndex);
     document.body.style.overflow = 'hidden';
   };
 
@@ -221,15 +234,14 @@ const Gallery: React.FC = () => {
     document.body.style.overflow = '';
   };
 
-  const navigateLightbox = (dir: 'prev' | 'next') => {
+  const navigateLightbox = useCallback((dir: 'prev' | 'next') => {
     if (selectedImage === null) return;
     const next = dir === 'next'
-      ? (selectedImage + 1) % galleryImages.length
-      : (selectedImage - 1 + galleryImages.length) % galleryImages.length;
+      ? (selectedImage + 1) % TOTAL
+      : (selectedImage - 1 + TOTAL) % TOTAL;
     setSelectedImage(next);
-  };
+  }, [selectedImage]);
 
-  // Keyboard support
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (selectedImage === null) return;
@@ -239,15 +251,7 @@ const Gallery: React.FC = () => {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImage]);
-
-  // ── Helpers ──────────────────────────────────────────────
-  /** Returns CSS width for a card depending on its priority index */
-  const getCardWidth = (index: number): string => {
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    if (index < TOP_PRIORITY_COUNT) return isMobile ? '310px' : '380px';
-    return isMobile ? '250px' : '300px';
-  };
+  }, [selectedImage, navigateLightbox]);
 
   return (
     <section
@@ -265,82 +269,79 @@ const Gallery: React.FC = () => {
             {t('gallery.title')}
           </h2>
           <p className="mt-3 text-white/40 text-sm tracking-wider">
-            {galleryImages.length} photos
+            {TOTAL} {t('gallery.photos')}
           </p>
         </div>
 
-        {/* ── Navigation arrows ───────────────────────── */}
+        {/* ── Navigation arrows (always enabled) ─────── */}
         <div className="hidden md:flex justify-end gap-3 px-6 lg:px-8 max-w-7xl mx-auto mb-6">
           <button
             onClick={() => scrollSlider('left')}
-            disabled={!canScrollLeft}
-            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
-              canScrollLeft
-                ? 'border-gold/50 text-gold hover:bg-gold/10 hover:border-gold'
-                : 'border-white/10 text-white/20 cursor-not-allowed'
-            }`}
+            className="w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 border-gold/50 text-gold hover:bg-gold/10 hover:border-gold"
             aria-label="Scroll gallery left"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={() => scrollSlider('right')}
-            disabled={!canScrollRight}
-            className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 ${
-              canScrollRight
-                ? 'border-gold/50 text-gold hover:bg-gold/10 hover:border-gold'
-                : 'border-white/10 text-white/20 cursor-not-allowed'
-            }`}
+            className="w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-300 border-gold/50 text-gold hover:bg-gold/10 hover:border-gold"
             aria-label="Scroll gallery right"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>
 
-        {/* ── Horizontal slider ───────────────────────── */}
+        {/* ── Horizontal slider (infinite) ─────────────── */}
         <div
           ref={sliderRef}
           className="gallery-slider flex gap-4 overflow-x-auto px-6 lg:px-8 pb-6 cursor-grab select-none"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          style={{
-            scrollSnapType: 'x mandatory',
-            WebkitOverflowScrolling: 'touch',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
         >
-          {galleryImages.map((image, index) => {
-            const isPriority = index < TOP_PRIORITY_COUNT;
+          {extendedImages.map((image, idx) => {
+            // Calculate the real index in galleryImages for lightbox
+            const realIndex = idx < CLONE_COUNT
+              ? TOTAL - CLONE_COUNT + idx
+              : idx >= CLONE_COUNT + TOTAL
+                ? idx - CLONE_COUNT - TOTAL
+                : idx - CLONE_COUNT;
+
             return (
               <div
-                key={index}
-                className={`gallery-card group flex-shrink-0 relative overflow-hidden rounded-lg cursor-pointer ${
-                  isPriority ? 'gallery-card-priority' : ''
-                }`}
+                key={image.key}
+                className="gallery-card group flex-shrink-0 relative overflow-hidden rounded-lg cursor-pointer"
                 style={{
-                  width: getCardWidth(index),
+                  width: typeof window !== 'undefined' && window.innerWidth < 768 ? '260px' : '310px',
                   scrollSnapAlign: 'start',
                 }}
-                onClick={() => openLightbox(index)}
+                onClick={() => openLightbox(realIndex)}
               >
                 <div
                   className="relative overflow-hidden rounded-lg aspect-[3/4]"
                   style={{
-                    boxShadow: isPriority
-                      ? '0 8px 32px rgba(201, 169, 98, 0.15), 0 2px 8px rgba(0,0,0,0.3)'
-                      : '0 4px 16px rgba(0,0,0,0.3)',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
                   }}
                 >
                   <img
                     src={image.src}
                     alt={image.alt}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                    loading={index < EAGER_LOAD_COUNT ? 'eager' : 'lazy'}
-                    decoding={index < EAGER_LOAD_COUNT ? 'sync' : 'async'}
+                    loading={idx < EAGER_COUNT ? 'eager' : 'lazy'}
+                    decoding={idx < EAGER_COUNT ? 'sync' : 'async'}
                     draggable={false}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      // Add a cache buster and retry once
+                      if (!target.dataset.retried) {
+                        target.dataset.retried = 'true';
+                        target.src = image.src + '?t=' + Date.now();
+                      } else {
+                        target.style.display = 'none';
+                      }
+                    }}
                   />
 
                   {/* Overlay gradient */}
@@ -351,31 +352,17 @@ const Gallery: React.FC = () => {
                     <div className="w-14 h-14 rounded-full bg-gold/20 backdrop-blur-sm flex items-center justify-center mb-3 border border-gold/40">
                       <ZoomIn className="w-6 h-6 text-gold" />
                     </div>
-                    <span className="text-white text-sm font-medium tracking-wide text-center px-4">
-                      {image.alt}
-                    </span>
-                    <span className="text-gold/80 text-xs mt-1 tracking-widest uppercase">
-                      {image.category}
-                    </span>
                   </div>
 
-                  {/* Priority pulse dot */}
-                  {isPriority && (
-                    <div className="absolute top-3 left-3 z-10">
-                      <div className="w-2.5 h-2.5 rounded-full bg-gold animate-pulse shadow-lg shadow-gold/50" />
-                    </div>
-                  )}
-
-                  {/* Bottom info bar */}
+                  {/* Bottom caption */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark/90 to-transparent">
-                    <p className="text-white/90 text-sm font-medium truncate">{image.alt}</p>
-                    <p className="text-gold/60 text-xs mt-0.5">{image.category}</p>
+                    <p className="text-white/90 text-xs font-medium tracking-wide leading-relaxed">
+                      {image.caption}
+                    </p>
                   </div>
 
-                  {/* Gold border for priority images */}
-                  {isPriority && (
-                    <div className="absolute inset-0 border-2 border-gold/30 rounded-lg group-hover:border-gold/60 transition-colors duration-500" />
-                  )}
+                  {/* Subtle border */}
+                  <div className="absolute inset-0 border border-white/5 rounded-lg group-hover:border-gold/30 transition-colors duration-500" />
                 </div>
               </div>
             );
@@ -435,13 +422,13 @@ const Gallery: React.FC = () => {
             style={{ animation: 'scaleIn 0.3s ease-out' }}
           />
 
-          {/* Counter + caption */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center z-10">
+          {/* Counter & Caption */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center z-10 max-w-md">
             <p className="text-white text-sm font-medium mb-1">
-              {galleryImages[selectedImage].alt}
+              {galleryImages[selectedImage].caption}
             </p>
             <p className="text-white/40 text-xs">
-              {selectedImage + 1} / {galleryImages.length}
+              {selectedImage + 1} / {TOTAL}
             </p>
           </div>
         </div>

@@ -168,6 +168,8 @@ textarea {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  background: transparent;
 }
 
 .btn-luxury::before {
@@ -260,49 +262,61 @@ textarea {
   transform-style: preserve-3d;
 }
 
-/* Animation delay utilities */
-.animation-delay-100 {
-  animation-delay: 100ms;
-}
-
-.animation-delay-200 {
-  animation-delay: 200ms;
-}
-
-.animation-delay-300 {
-  animation-delay: 300ms;
-}
-
-.animation-delay-400 {
-  animation-delay: 400ms;
-}
-
-.animation-delay-500 {
-  animation-delay: 500ms;
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+/* ============================
+   Fade In Animation
+   ============================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-/* Mobile optimizations */
-@media (max-width: 768px) {
-  .card-luxury {
-    padding: 1.5rem;
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
-  
-  .btn-luxury {
-    padding: 0.875rem 1.5rem;
-    font-size: 0.75rem;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
+}
+
+/* ============================
+   Premium Image Showcase
+   ============================ */
+.premium-image-container {
+  position: relative;
+}
+
+.premium-image-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border: 1px solid rgba(201, 169, 98, 0.1);
+  transition: border-color 0.5s ease;
+}
+
+.premium-image-container:hover::before {
+  border-color: rgba(201, 169, 98, 0.3);
+}
+
+/* ============================
+   Category Card Styles
+   ============================ */
+.category-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ============================
@@ -334,54 +348,23 @@ textarea {
   transform: translateY(-4px);
 }
 
-/* Priority card styling */
-.gallery-card-priority {
-  position: relative;
-}
-
-.gallery-card-priority::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, rgba(201, 169, 98, 0.3), transparent, rgba(201, 169, 98, 0.2));
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.gallery-card-priority:hover::after {
-  opacity: 1;
-}
 
 /* ============================
-   Lightbox Animations
+   Contact Link Styles
    ============================ */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.bio-contact-link {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.bio-contact-link:hover {
+  transform: translateY(-2px);
 }
 
 /* ============================
    Priority Photo Styles
    ============================ */
-
 .bio-photo-container,
 .contact-photo-container {
   position: relative;
@@ -403,19 +386,26 @@ textarea {
   border-color: rgba(201, 169, 98, 0.35);
 }
 
-/* Contact card hover */
-.contact-card {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-.contact-card:hover {
-  transform: translateY(-2px);
-  box-shadow: -20px 20px 60px rgba(0, 0, 0, 0.5),
-              0 0 30px rgba(201, 169, 98, 0.05);
-}
-
-/* RTL support for contact cards */
-[dir="rtl"] .contact-card:hover {
-  transform: translateY(-2px);
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .card-luxury {
+    padding: 1.5rem;
+  }
+  
+  .btn-luxury {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.75rem;
+  }
 }

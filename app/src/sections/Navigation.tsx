@@ -12,34 +12,31 @@ const Navigation: React.FC = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const languages: { code: Language; label: string; flag: string }[] = [
+    { code: 'it', label: 'IT', flag: '🇮🇹' },
+    { code: 'ar', label: 'عربي', flag: '🇸🇦' },
     { code: 'en', label: 'EN', flag: '🇬🇧' },
     { code: 'fr', label: 'FR', flag: '🇫🇷' },
-    { code: 'ar', label: 'عربي', flag: '🇸🇦' },
     { code: 'tr', label: 'TR', flag: '🇹🇷' },
-    { code: 'it', label: 'IT', flag: '🇮🇹' },
   ];
 
   const navItems = [
     { key: 'home', href: '#hero' },
-    { key: 'biography', href: '#biography' },
-    { key: 'career', href: '#career' },
-    { key: 'awards', href: '#awards' },
+    { key: 'about', href: '#biography' },
+    { key: 'portfolio', href: '#portfolio' },
     { key: 'gallery', href: '#gallery' },
-    { key: 'contact', href: '#contact' },
+    { key: 'contact', href: '#biography' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Show/hide based on scroll direction
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
       
-      // Add glassmorphism after 100px
       setIsScrolled(currentScrollY > 100);
       setLastScrollY(currentScrollY);
     };
@@ -57,23 +54,8 @@ const Navigation: React.FC = () => {
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
-      // Get the nav height for offset
       const navHeight = 80;
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      
-      // For biography, scroll to the bio-content anchor for proper positioning on mobile
-      if (targetId === 'biography') {
-        const bioContent = document.getElementById('bio-content');
-        if (bioContent && window.innerWidth < 1024) {
-          const bioContentPosition = bioContent.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top: bioContentPosition - navHeight - 20,
-            behavior: 'smooth',
-          });
-          setIsMobileMenuOpen(false);
-          return;
-        }
-      }
       
       window.scrollTo({
         top: elementPosition - navHeight,

@@ -14,9 +14,8 @@ export const languageDirection: Record<Language, LanguageDirection> = {
 // Translation interfaces
 export interface NavigationTranslations {
   home: string;
-  biography: string;
-  career: string;
-  awards: string;
+  about: string;
+  portfolio: string;
   gallery: string;
   contact: string;
 }
@@ -30,69 +29,55 @@ export interface HeroTranslations {
 export interface BiographyTranslations {
   label: string;
   title: string;
-  content: string[];
+  shortContent: string;
   signature: string;
 }
 
-export interface CareerMilestone {
-  year: string;
-  events: string[];
+export interface CategoryItem {
+  title: string;
+  items: string[];
 }
 
-export interface CareerTranslations {
+export interface CategoriesTranslations {
   label: string;
   title: string;
-  milestones: CareerMilestone[];
-}
-
-export interface AwardItem {
-  title: string;
-  description: string;
-}
-
-export interface AwardsTranslations {
-  label: string;
-  title: string;
-  items: AwardItem[];
+  films: CategoryItem;
+  awards: CategoryItem;
+  career: CategoryItem;
+  festivals: CategoryItem;
+  fashion: CategoryItem;
+  media: CategoryItem;
 }
 
 export interface GalleryTranslations {
   label: string;
   title: string;
-}
-
-export interface PresenceEvent {
-  name: string;
-  description: string;
-}
-
-export interface PresenceTranslations {
-  label: string;
-  title: string;
-  events: PresenceEvent[];
+  loadMore: string;
+  showLess: string;
+  photos: string;
 }
 
 export interface ContactTranslations {
   label: string;
   title: string;
-  professional: string;
-  social: string;
-  representation: string;
   email: string;
+  emailLabel: string;
+  instagramLabel: string;
+  representation: string;
+  representationText: string;
 }
 
 export interface FooterTranslations {
   copyright: string;
+  backToTop: string;
 }
 
 export interface Translations {
   navigation: NavigationTranslations;
   hero: HeroTranslations;
   biography: BiographyTranslations;
-  career: CareerTranslations;
-  awards: AwardsTranslations;
+  categories: CategoriesTranslations;
   gallery: GalleryTranslations;
-  presence: PresenceTranslations;
   contact: ContactTranslations;
   footer: FooterTranslations;
 }
@@ -109,28 +94,4 @@ export interface SocialLink {
   name: string;
   url: string;
   icon: string;
-}
-
-// Award type
-export interface Award {
-  year: string;
-  title: string;
-  organization: string;
-  description: string;
-}
-
-// Film type
-export interface Film {
-  year: string;
-  title: string;
-  role: string;
-  director?: string;
-}
-
-// Festival type
-export interface Festival {
-  year: string;
-  name: string;
-  location: string;
-  description: string;
 }

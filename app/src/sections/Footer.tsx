@@ -7,16 +7,14 @@ import { Instagram, Mail, ArrowUp } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer: React.FC = () => {
-  const { t, currentLanguage } = useLanguage();
+  const { t } = useLanguage();
   const footerRef = useRef<HTMLElement>(null);
 
   const navItems = [
     { key: 'home', href: '#hero' },
-    { key: 'biography', href: '#biography' },
-    { key: 'career', href: '#career' },
-    { key: 'awards', href: '#awards' },
+    { key: 'about', href: '#biography' },
+    { key: 'portfolio', href: '#portfolio' },
     { key: 'gallery', href: '#gallery' },
-    { key: 'contact', href: '#contact' },
   ];
 
   const socialLinks = [
@@ -26,9 +24,7 @@ const Footer: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Divider line draw
       gsap.set('.footer-divider', { scaleX: 0 });
-
       ScrollTrigger.create({
         trigger: footerRef.current,
         start: 'top 90%',
@@ -42,9 +38,7 @@ const Footer: React.FC = () => {
         once: true,
       });
 
-      // Logo fade in
       gsap.set('.footer-logo', { opacity: 0, scale: 0.8 });
-
       ScrollTrigger.create({
         trigger: footerRef.current,
         start: 'top 85%',
@@ -60,9 +54,7 @@ const Footer: React.FC = () => {
         once: true,
       });
 
-      // Links stagger
       gsap.set('.footer-link', { opacity: 0 });
-
       ScrollTrigger.create({
         trigger: footerRef.current,
         start: 'top 80%',
@@ -78,9 +70,7 @@ const Footer: React.FC = () => {
         once: true,
       });
 
-      // Social icons pop
       gsap.set('.footer-social', { scale: 0 });
-
       ScrollTrigger.create({
         trigger: footerRef.current,
         start: 'top 75%',
@@ -108,16 +98,6 @@ const Footer: React.FC = () => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const getBackToTopText = () => {
-    switch (currentLanguage) {
-      case 'ar': return 'العودة إلى الأعلى';
-      case 'fr': return 'Retour en haut';
-      case 'tr': return 'Yukarıya dön';
-      case 'it': return 'Torna su';
-      default: return 'Back to top';
     }
   };
 
@@ -192,7 +172,7 @@ const Footer: React.FC = () => {
             onClick={scrollToTop}
             className="group flex items-center gap-2 text-white/40 hover:text-gold text-sm transition-colors duration-300"
           >
-            <span>{getBackToTopText()}</span>
+            <span>{t('footer.backToTop')}</span>
             <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform duration-300" />
           </button>
         </div>

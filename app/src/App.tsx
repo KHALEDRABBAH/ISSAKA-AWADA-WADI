@@ -5,11 +5,8 @@ import { LanguageProvider } from '@/context/LanguageContext';
 import Navigation from '@/sections/Navigation';
 import Hero from '@/sections/Hero';
 import Biography from '@/sections/Biography';
-import Career from '@/sections/Career';
-import Awards from '@/sections/Awards';
+import Categories from '@/sections/Categories';
 import Gallery from '@/sections/Gallery';
-import Presence from '@/sections/Presence';
-import Contact from '@/sections/Contact';
 import Footer from '@/sections/Footer';
 import './App.css';
 
@@ -17,16 +14,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
-    // Initialize GSAP defaults
     gsap.defaults({
       ease: 'expo.out',
       duration: 0.8,
     });
 
-    // Refresh ScrollTrigger on load
     ScrollTrigger.refresh();
 
-    // Handle resize
     const handleResize = () => {
       ScrollTrigger.refresh();
     };
@@ -52,11 +46,8 @@ function App() {
         <main>
           <Hero />
           <Biography />
-          <Career />
-          <Awards />
+          <Categories />
           <Gallery />
-          <Presence />
-          <Contact />
         </main>
         
         {/* Footer */}
