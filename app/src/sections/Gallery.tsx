@@ -268,9 +268,7 @@ const Gallery: React.FC = () => {
           <h2 className="gallery-header-title font-display text-4xl lg:text-5xl text-white">
             {t('gallery.title')}
           </h2>
-          <p className="mt-3 text-white/40 text-sm tracking-wider">
-            {TOTAL} {t('gallery.photos')}
-          </p>
+
         </div>
 
         {/* ── Navigation arrows (always enabled) ─────── */}
